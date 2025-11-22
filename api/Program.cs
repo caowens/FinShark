@@ -1,6 +1,8 @@
 using api.Data;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
+using api.Interfaces;
+using api.Repository;
 
 Env.Load();
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 
