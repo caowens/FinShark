@@ -14,6 +14,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
+
 var connectionString = $"Server=localhost,1434;Database=FinShark;User Id=SA;Password={Environment.GetEnvironmentVariable("SA_PASSWORD")};Encrypt=False;";
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
